@@ -1,13 +1,15 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Coords } from "../lib/types";
+import { OPENWEATHER_KEY } from "@/lib/axios";
 
 type Props = {
     coords: Coords;
     onMapClick: (lat: number, lon: number) => void;
+    mapLayer: string;
 };
 
-export default function Map({ coords, onMapClick }: Props) {
+export default function Map({ coords, onMapClick, mapLayer }: Props) {
     const { lat, lon } = coords;
 
     return (
@@ -20,6 +22,9 @@ export default function Map({ coords, onMapClick }: Props) {
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <TileLayer
+                url={`https://tile.openweathermap.org/map/${mapLayer}/{z}/{x}/{y}.png?appid=${OPENWEATHER_KEY}`}
             />
             <Marker position={[lat, lon]} />
         </MapContainer>

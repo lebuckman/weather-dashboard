@@ -21,6 +21,9 @@ export default function LocationDropdown({ location, setLocation }: Props) {
                 <SelectValue />
             </SelectTrigger>
             <SelectContent className="z-1001">
+                {location === "custom" && (
+                    <SelectItem value="custom">Custom</SelectItem>
+                )}
                 {CITY_GROUPS.map((group) => (
                     <SelectGroup key={group.label}>
                         <SelectLabel>{group.label}</SelectLabel>
