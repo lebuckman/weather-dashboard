@@ -1,4 +1,5 @@
-import weatherApi from "./axios";
+import {weatherApi, geoApi} from "./axios";
+import { GeocodeResponseSchema } from "./schemas/geocodeSchemas";
 import {
     HourlyForecastResponseSchema,
     WeatherResponseSchema,
@@ -51,4 +52,13 @@ export async function getDailyForecast({
         },
     });
     return DailyForecastResponseSchema.parse(data);
+}
+
+export async function getGeocode(location: string) {
+    const { data } = await geoApi.get("/direct", {
+        params: {
+            q: location
+        }
+    });
+    return GeocodeResponseSchema.parse(data)
 }
