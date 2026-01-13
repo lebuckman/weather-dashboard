@@ -9,6 +9,7 @@ import LocationDropdown from "./components/dropdowns/LocationDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { getGeocode } from "./lib/api";
 import MapLayerDropdown from "./components/dropdowns/MapLayerDropdown";
+import MapLegend from "./components/MapLegend";
 
 function App() {
     const [mapLayer, setMapLayer] = useState("clouds_new");
@@ -32,21 +33,37 @@ function App() {
     const coords =
         location === "custom"
             ? coordinates
-            : { lat: geocodeData?.lat ?? coordinates.lat, lon: geocodeData?.lon ?? coordinates.lon };
+            : {
+                  lat: geocodeData?.lat ?? coordinates.lat,
+                  lon: geocodeData?.lon ?? coordinates.lon,
+              };
 
     return (
         <div className="flex flex-col gap-8">
             <div className="flex gap-8">
                 <div className="flex gap-4">
                     <h2 className="text-2xl font-semibold">Location:</h2>
-                    <LocationDropdown location={location} setLocation={setLocation} />
+                    <LocationDropdown
+                        location={location}
+                        setLocation={setLocation}
+                    />
                 </div>
                 <div className="flex gap-4">
                     <h2 className="text-2xl font-semibold">Layer: </h2>
-                    <MapLayerDropdown mapLayer={mapLayer} setMapLayer={setMapLayer} />
+                    <MapLayerDropdown
+                        mapLayer={mapLayer}
+                        setMapLayer={setMapLayer}
+                    />
                 </div>
             </div>
-            <Map coords={coords} onMapClick={handleMapClick} mapLayer={mapLayer} />
+            <div className="relative">
+                <Map
+                    coords={coords}
+                    onMapClick={handleMapClick}
+                    mapLayer={mapLayer}
+                />
+                <MapLegend mapLayer={mapLayer} />
+            </div>
             <CurrentWeather coords={coords} />
             <HourlyForecast coords={coords} />
             <DailyForecast coords={coords} />
