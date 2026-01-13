@@ -21,12 +21,17 @@ export async function getWeather({
     return WeatherResponseSchema.parse(data);
 }
 
-export async function getHourlyForecast({ lat, lon }: GetWeatherParams) {
+export async function getHourlyForecast({
+    lat,
+    lon,
+    units = "imperial",
+}: GetWeatherParams) {
     const { data } = await weatherApi.get("/forecast/hourly", {
         params: {
             lat,
             lon,
-            cnt: 1,
+            units,
+            cnt: 48, // limit to 48 hours
         },
     });
     return HourlyForecastResponseSchema.parse(data);
@@ -42,7 +47,7 @@ export async function getDailyForecast({
             lat,
             lon,
             units,
-            cnt: 1,
+            cnt: 8, // limit to 8 days
         },
     });
     return DailyForecastResponseSchema.parse(data);
