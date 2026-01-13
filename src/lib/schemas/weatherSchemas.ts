@@ -106,7 +106,7 @@ export const HourlyForecastItemSchema = z.object({
         gust: z.number().optional(),
     }),
 
-    visibility: z.number(),
+    visibility: z.number().optional(),
     pop: z.number(),
 
     rain: z
