@@ -5,3 +5,8 @@ export type GetWeatherParams = {
     lon: number;
     units?: Units;
 };
+
+export type Coords = {
+    lat: number;
+    lon: number;
+};

@@ -2,19 +2,21 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import { getDailyForecast } from "../../lib/api";
 import WeatherIcon from "../WeatherIcon";
+import type { Coords } from "../../lib/types";
 
-type Props = {};
+type Props = {
+    coords: Coords;
+};
 
-export default function DailyForecast({}: Props) {
+export default function DailyForecast({ coords }: Props) {
     const { data: daily } = useSuspenseQuery({
-        queryKey: ["daily"],
+        queryKey: ["daily", coords],
         queryFn: () =>
             getDailyForecast({
-                lat: 10,
-                lon: 25,
+                lat: coords.lat,
+                lon: coords.lon,
             }),
         select: (daily) => daily.list,
-        staleTime: 300000,
     });
 
     return (

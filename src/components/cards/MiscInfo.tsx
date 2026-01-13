@@ -8,18 +8,20 @@ import Sunrise from "/src/assets/sunrise.svg?react";
 import Sunset from "/src/assets/sunset.svg?react";
 import UpArrow from "/src/assets/uparrow.svg?react";
 import Wind from "/src/assets/wind.svg?react";
+import type { Coords } from "../../lib/types";
 
-type Props = {};
+type Props = {
+    coords: Coords;
+};
 
-export default function MiscInfo({}: Props) {
+export default function MiscInfo({ coords }: Props) {
     const { data: current } = useSuspenseQuery({
-        queryKey: ["weather"],
+        queryKey: ["weather", coords],
         queryFn: () =>
             getWeather({
-                lat: 10,
-                lon: 25,
+                lat: coords.lat,
+                lon: coords.lon,
             }),
-        staleTime: 300000,
     });
 
     return (
@@ -62,7 +64,10 @@ const rows = [
         value: "wind.deg",
         Icon: Wind,
         format: (v: number) => (
-            <UpArrow className="size-5 invert" style={{ transform: `rotate(${v})` }} />
+            <UpArrow
+                className="size-5 invert transition-transform duration-300"
+                style={{ transform: `rotate(${v}deg)` }}
+            />
         ),
     },
     {

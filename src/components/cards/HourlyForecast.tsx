@@ -2,22 +2,23 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
 import { getHourlyForecast } from "../../lib/api";
 import WeatherIcon from "../WeatherIcon";
+import type { Coords } from "../../lib/types";
 
-type Props = {};
+type Props = {
+    coords: Coords;
+};
 
-export default function HourlyForecast({}: Props) {
+export default function HourlyForecast({ coords }: Props) {
     const { data: hourly } = useSuspenseQuery({
-        queryKey: ["hourly"],
+        queryKey: ["hourly", coords],
         queryFn: () =>
             getHourlyForecast({
-                lat: 10,
-                lon: 25,
+                lat: coords.lat,
+                lon: coords.lon,
             }),
         select: (hourly) => hourly.list,
-        staleTime: 300000,
-
     });
-	
+
     return (
         <Card
             title="Hourly Forecast (48 Hours)"
