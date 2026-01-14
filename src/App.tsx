@@ -3,13 +3,17 @@ import HourlyForecast from "./components/cards/HourlyForecast";
 import CurrentWeather from "./components/cards/CurrentWeather";
 import MiscInfo from "./components/cards/MiscInfo";
 import Map from "./components/Map";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import type { Coords } from "./lib/types";
 import LocationDropdown from "./components/dropdowns/LocationDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { getGeocode } from "./lib/api";
 import MapLayerDropdown from "./components/dropdowns/MapLayerDropdown";
 import MapLegend from "./components/MapLegend";
+import CurrentSkeleton from "./components/skeletons/CurrentSkeleton";
+import DailySkeleton from "./components/skeletons/DailySkeleton";
+import HourlySkeleton from "./components/skeletons/HourlySkeleton";
+import MiscInfoSkeleton from "./components/skeletons/MiscInfoSkeleton";
 
 function App() {
     const [mapLayer, setMapLayer] = useState("clouds_new");
@@ -64,10 +68,18 @@ function App() {
                 />
                 <MapLegend mapLayer={mapLayer} />
             </div>
-            <CurrentWeather coords={coords} />
-            <HourlyForecast coords={coords} />
-            <DailyForecast coords={coords} />
-            <MiscInfo coords={coords} />
+            <Suspense fallback={<CurrentSkeleton />}>
+                <CurrentWeather coords={coords} />
+            </Suspense>
+            <Suspense fallback={<HourlySkeleton />}>
+                <HourlyForecast coords={coords} />
+            </Suspense>
+            <Suspense fallback={<DailySkeleton />}>
+                <DailyForecast coords={coords} />
+            </Suspense>
+            <Suspense fallback={<MiscInfoSkeleton />}>
+                <MiscInfo coords={coords} />
+            </Suspense>
         </div>
     );
 }
