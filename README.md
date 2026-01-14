@@ -6,9 +6,9 @@ Original project credit outlined below.
 
 ![Full Dashboard View](/public/desktop.png)
 
-<div style="display: flex; align-items: center; justify-content: space-evenly;">
-  <img src="./public/tablet.png" alt="Tablet View" width="500px">
-  <img src="./public/mobile.png" alt="Mobile View" width="274px">
+<div style="display: flex; align-items: center;">
+  <img src="./public/tablet.png" alt="Tablet View" width="650px">
+  <img src="./public/mobile.png" alt="Mobile View" width="355px">
 </div>
 
 ## Features
