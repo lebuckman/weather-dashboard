@@ -1,4 +1,5 @@
-import {weatherApi, geoApi} from "./axios";
+import { weatherApi, geoApi } from "./axios";
+import { AirPollutionResponseSchema } from "./schemas/airPollutionSchemas";
 import { GeocodeResponseSchema } from "./schemas/geocodeSchemas";
 import {
     HourlyForecastResponseSchema,
@@ -54,11 +55,21 @@ export async function getDailyForecast({
     return DailyForecastResponseSchema.parse(data);
 }
 
+export async function getAirPollution({ lat, lon }: GetWeatherParams) {
+    const { data } = await weatherApi.get("/air_pollution", {
+        params: {
+            lat,
+            lon,
+        },
+    });
+    return AirPollutionResponseSchema.parse(data);
+}
+
 export async function getGeocode(location: string) {
     const { data } = await geoApi.get("/direct", {
         params: {
-            q: location
-        }
+            q: location,
+        },
     });
-    return GeocodeResponseSchema.parse(data)
+    return GeocodeResponseSchema.parse(data);
 }
