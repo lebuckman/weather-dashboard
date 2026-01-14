@@ -1,12 +1,14 @@
 # Weather Dashboard
 
-A React project that leverages the information provided by OpenWeather API to display useful weather statistics on a location selected on an interactive map provided with the help of Leaflet. Original project credit outlined below.
+A React project that leverages the information provided by OpenWeather API to display useful weather statistics on a location selected on an interactive map provided by Leaflet. This project was used to practice Tailwind responsive design, using TanStack query with APIs, and working with Zod validation.
+
+Original project credit outlined below.
 
 ![Full Dashboard View](/public/desktop.png)
 
-<div style="display: flex; align-items: center; justify-content: space-evenly">
-  <img src="./public/tablet.png" alt="Tablet View" width="400px">
-  <img src="./public/mobile.png" alt="Mobile View" width="220px">
+<div style="display: flex; align-items: center; justify-content: space-evenly;">
+  <img src="./public/tablet.png" alt="Tablet View" width="500px">
+  <img src="./public/mobile.png" alt="Mobile View" width="274px">
 </div>
 
 ## Features
@@ -39,23 +41,24 @@ This project makes use of free* APIs provided by OpenWeather.
 - **Air Pollution API**
 - **Geocoding API**
 
-<small>* Free for students</small>
+> \* Free for students
 
 ### `.env.local`
 
 An API key is required to access [OpenWeather endpoints](https://openweathermap.org/api).
 
 ```env
-# Obtain an API key at https://openweathermap.org/api
+# View available API endpoints at https://openweathermap.org
 VITE_OPENWEATHER_KEY=
 ```
 
 ## Project Alterations
 
-- Rather than using OpenWeather's One Call API 3.0, which requires payment information, different endpoints were used for fetching daily and hourly forecast data.
+- Rather than using OpenWeather's **One Call API 3.0**, which requires payment information, different endpoints were used for fetching daily and hourly forecast data.
 - The use of an Axios instance simplified calling the different APIs
 - Modified TanStack queries used to account different endpoints
 - Excluded MapTiler SDK -> issues importing required packages
+- Slight UI tweaks
 
 ## Acknowledgements
 
