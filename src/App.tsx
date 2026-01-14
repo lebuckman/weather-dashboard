@@ -14,6 +14,8 @@ import CurrentSkeleton from "./components/skeletons/CurrentSkeleton";
 import DailySkeleton from "./components/skeletons/DailySkeleton";
 import HourlySkeleton from "./components/skeletons/HourlySkeleton";
 import MiscInfoSkeleton from "./components/skeletons/MiscInfoSkeleton";
+import SidePanel from "./components/SidePanel";
+import Hamburger from "/src/assets/hamburger.svg?react";
 
 function App() {
     const [mapLayer, setMapLayer] = useState("clouds_new");
@@ -22,6 +24,7 @@ function App() {
         lat: 37.56,
         lon: 126.98,
     });
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
 
     const { data: geocodeData } = useQuery({
         queryKey: ["geocode", location],
@@ -43,44 +46,54 @@ function App() {
               };
 
     return (
-        <div className="flex flex-col gap-8">
-            <div className="flex gap-8">
-                <div className="flex gap-4">
-                    <h2 className="text-2xl font-semibold">Location:</h2>
-                    <LocationDropdown
-                        location={location}
-                        setLocation={setLocation}
-                    />
+        <>
+            <div className="flex flex-col gap-8">
+                <div className="flex gap-8">
+                    <div className="flex gap-4">
+                        <h2 className="text-2xl font-semibold">Location:</h2>
+                        <LocationDropdown
+                            location={location}
+                            setLocation={setLocation}
+                        />
+                    </div>
+                    <div className="flex gap-4">
+                        <h2 className="text-2xl font-semibold">Layer: </h2>
+                        <MapLayerDropdown
+                            mapLayer={mapLayer}
+                            setMapLayer={setMapLayer}
+                        />
+                    </div>
+                    <button onClick={() => setIsSidePanelOpen(true)}>
+                        <Hamburger className="size-8 invert ml-auto hover:cursor-pointer" />
+                    </button>
                 </div>
-                <div className="flex gap-4">
-                    <h2 className="text-2xl font-semibold">Layer: </h2>
-                    <MapLayerDropdown
+                <div className="relative">
+                    <Map
+                        coords={coords}
+                        onMapClick={handleMapClick}
                         mapLayer={mapLayer}
-                        setMapLayer={setMapLayer}
                     />
+                    <MapLegend mapLayer={mapLayer} />
                 </div>
-            </div>
-            <div className="relative">
-                <Map
+                <Suspense fallback={<CurrentSkeleton />}>
+                    <CurrentWeather coords={coords} />
+                </Suspense>
+                <Suspense fallback={<HourlySkeleton />}>
+                    <HourlyForecast coords={coords} />
+                </Suspense>
+                <Suspense fallback={<DailySkeleton />}>
+                    <DailyForecast coords={coords} />
+                </Suspense>
+                <Suspense fallback={<MiscInfoSkeleton />}>
+                    <MiscInfo coords={coords} />
+                </Suspense>
+                <SidePanel
                     coords={coords}
-                    onMapClick={handleMapClick}
-                    mapLayer={mapLayer}
+                    isSidePanelOpen={isSidePanelOpen}
+                    setIsSidePanelOpen={setIsSidePanelOpen}
                 />
-                <MapLegend mapLayer={mapLayer} />
             </div>
-            <Suspense fallback={<CurrentSkeleton />}>
-                <CurrentWeather coords={coords} />
-            </Suspense>
-            <Suspense fallback={<HourlySkeleton />}>
-                <HourlyForecast coords={coords} />
-            </Suspense>
-            <Suspense fallback={<DailySkeleton />}>
-                <DailyForecast coords={coords} />
-            </Suspense>
-            <Suspense fallback={<MiscInfoSkeleton />}>
-                <MiscInfo coords={coords} />
-            </Suspense>
-        </div>
+        </>
     );
 }
 
