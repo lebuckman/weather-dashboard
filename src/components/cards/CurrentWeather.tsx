@@ -19,7 +19,7 @@ export default function CurrentWeather({ coords }: Props) {
     });
 
     return (
-        <Card title="Current Weather" className="text-center space-y-6">
+        <Card title="Current Weather" childrenClassName="text-center space-y-6">
             <div className="flex flex-col items-center gap-2">
                 <h2 className="text-6xl font-semibold">
                     {Math.round(current.main.temp)}ºF

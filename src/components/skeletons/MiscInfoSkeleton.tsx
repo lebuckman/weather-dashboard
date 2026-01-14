@@ -3,7 +3,7 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function MiscInfoSkeleton() {
     return (
-        <Card title="Additional Weather Info" className="flex flex-col gap-8">
+        <Card title="Additional Weather Info" childrenClassName="flex flex-col gap-8">
             {[...Array(6)].map((_, index) => {
                 return (
                     <div key={index} className="flex justify-between">

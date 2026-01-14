@@ -25,7 +25,7 @@ export default function MiscInfo({ coords }: Props) {
     });
 
     return (
-        <Card title="Additional Weather Info" className="flex flex-col gap-8">
+        <Card title="Additional Weather Info" childrenClassName="flex flex-col gap-8">
             {rows.map(({ label, value, Icon, format }) => {
                 const raw = getValue(current, value);
                 return (

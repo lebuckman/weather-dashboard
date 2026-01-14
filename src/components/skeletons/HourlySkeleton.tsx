@@ -5,7 +5,7 @@ export default function HourlySkeleton() {
     return (
         <Card
             title="Hourly Forecast (48 Hours)"
-            className="flex gap-6 overflow-x-scroll"
+            childrenClassName="flex gap-6 overflow-x-scroll"
         >
             {[...Array(48)].map((_, index) => (
                 <div
