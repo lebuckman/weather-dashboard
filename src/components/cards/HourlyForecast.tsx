@@ -27,9 +27,9 @@ export default function HourlyForecast({ coords }: Props) {
             {hourly.map((hour) => (
                 <div
                     key={hour.dt}
-                    className="flex flex-col items-center gap-2 p-2"
+                    className="flex flex-col items-center gap-2 p-2 2xl:justify-between"
                 >
-                    <p className="whitespace-nowrap">
+                    <p className="whitespace-nowrap 2xl:scale-110">
                         {new Date(hour.dt * 1000).toLocaleTimeString(
                             undefined,
                             {
@@ -39,10 +39,11 @@ export default function HourlyForecast({ coords }: Props) {
                         )}
                     </p>
                     <WeatherIcon
+                    className="2xl:size-10"
                         src={hour.weather[0].icon}
                         alt={hour.weather[0].description}
                     />
-                    <p>{Math.round(hour.main.temp)}ºF</p>
+                    <p className="2xl:scale-110">{Math.round(hour.main.temp)}ºF</p>
                 </div>
             ))}
         </Card>

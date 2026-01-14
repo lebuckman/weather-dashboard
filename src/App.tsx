@@ -16,6 +16,7 @@ import HourlySkeleton from "./components/skeletons/HourlySkeleton";
 import MiscInfoSkeleton from "./components/skeletons/MiscInfoSkeleton";
 import SidePanel from "./components/SidePanel";
 import Hamburger from "/src/assets/hamburger.svg?react";
+import MobileHeader from "./components/MobileHeader";
 
 function App() {
     const [mapLayer, setMapLayer] = useState("clouds_new");
@@ -24,7 +25,7 @@ function App() {
         lat: 37.56,
         lon: 126.98,
     });
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
     const { data: geocodeData } = useQuery({
         queryKey: ["geocode", location],
@@ -47,52 +48,66 @@ function App() {
 
     return (
         <>
-            <div className="flex flex-col gap-8">
-                <div className="flex gap-8">
-                    <div className="flex gap-4">
+            <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
+            <div className="flex flex-col gap-8 p-8 pt-0 xs:pt-8 w-full min-h-screen lg:w-[calc(100dvw-var(--sidebar-width))]">
+                <div className="flex flex-col gap-4 xs:flex-row xs:gap-8">
+                    <div className="flex flex-col gap-2 md:flex-row md:gap-4">
                         <h2 className="text-2xl font-semibold">Location:</h2>
                         <LocationDropdown
                             location={location}
                             setLocation={setLocation}
                         />
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex flex-col gap-2 md:flex-row md:gap-4">
                         <h2 className="text-2xl font-semibold">Layer: </h2>
                         <MapLayerDropdown
                             mapLayer={mapLayer}
                             setMapLayer={setMapLayer}
                         />
                     </div>
-                    <button onClick={() => setIsSidePanelOpen(true)}>
-                        <Hamburger className="size-8 invert ml-auto hover:cursor-pointer" />
+                    <button
+                        onClick={() => setIsSidePanelOpen(true)}
+                        className="hidden xs:block"
+                    >
+                        <Hamburger className="size-8 invert ml-auto hover:cursor-pointer lg:hidden" />
                     </button>
                 </div>
-                <div className="relative">
-                    <Map
-                        coords={coords}
-                        onMapClick={handleMapClick}
-                        mapLayer={mapLayer}
-                    />
-                    <MapLegend mapLayer={mapLayer} />
+                <div className="grid grid-cols-1 gap-8 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4">
+                    <div className="relative h-120 md:col-span-2 2xl:h-auto 2xl:col-span-full 2xl:row-span-2 order-1">
+                        <Map
+                            coords={coords}
+                            onMapClick={handleMapClick}
+                            mapLayer={mapLayer}
+                        />
+                        <MapLegend mapLayer={mapLayer} />
+                    </div>
+                    <div className="2xl:row-span-2 order-2">
+                        <Suspense fallback={<CurrentSkeleton />}>
+                            <CurrentWeather coords={coords} />
+                        </Suspense>
+                    </div>
+                    <div className="2xl:row-span-2 order-3 2xl:order-4">
+                        <Suspense fallback={<DailySkeleton />}>
+                            <DailyForecast coords={coords} />
+                        </Suspense>
+                    </div>
+                    <div className="md:col-span-2 md:order-4 2xl:row-span-1 order-4 2xl:order-3">
+                        <Suspense fallback={<HourlySkeleton />}>
+                            <HourlyForecast coords={coords} />
+                        </Suspense>
+                    </div>
+                    <div className="md:col-span-2 2xl:row-span-1 order-5">
+                        <Suspense fallback={<MiscInfoSkeleton />}>
+                            <MiscInfo coords={coords} />
+                        </Suspense>
+                    </div>
                 </div>
-                <Suspense fallback={<CurrentSkeleton />}>
-                    <CurrentWeather coords={coords} />
-                </Suspense>
-                <Suspense fallback={<HourlySkeleton />}>
-                    <HourlyForecast coords={coords} />
-                </Suspense>
-                <Suspense fallback={<DailySkeleton />}>
-                    <DailyForecast coords={coords} />
-                </Suspense>
-                <Suspense fallback={<MiscInfoSkeleton />}>
-                    <MiscInfo coords={coords} />
-                </Suspense>
-                <SidePanel
-                    coords={coords}
-                    isSidePanelOpen={isSidePanelOpen}
-                    setIsSidePanelOpen={setIsSidePanelOpen}
-                />
             </div>
+            <SidePanel
+                coords={coords}
+                isSidePanelOpen={isSidePanelOpen}
+                setIsSidePanelOpen={setIsSidePanelOpen}
+            />
         </>
     );
 }

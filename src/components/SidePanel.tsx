@@ -22,12 +22,12 @@ export default function SidePanel(props: Props) {
     return (
         <div
             className={clsx(
-                "fixed top-0 right-0 h-screen w-100 shadow-md bg-sidebar z-1001 py-8 px-6 overflow-y-scroll transition-transform duration-300",
+                "fixed top-0 right-0 w-(--sidebar-width) h-screen shadow-md bg-sidebar z-1001 py-8 px-6 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
                 isSidePanelOpen ? "translate-x-0" : "translate-x-full"
             )}
         >
             <button onClick={() => setIsSidePanelOpen(false)}>
-                <Close className="size-5 invert mb-8 hover:cursor-pointer" />
+                <Close className="size-5 invert mb-8 lg:hidden" />
             </button>
             <Suspense fallback={<SidePanelSkeleton />}>
                 <AirPollution {...props} />
@@ -136,8 +136,9 @@ function AirPollution({ coords }: Props) {
                             <p>{max}</p>
                         </div>
                         <div className="flex justify-between">
-                            {Object.keys(pollutant).map((quality) => (
+                            {Object.keys(pollutant).map((quality, index) => (
                                 <span
+                                    key={index}
                                     className={clsx(
                                         "px-2 py-1 rounded-md text-xs font-medium",
                                         quality === currentLevel

@@ -15,7 +15,7 @@ type Props = {
 export default function MapLayerDropdown({ mapLayer, setMapLayer }: Props) {
     return (
         <Select value={mapLayer} onValueChange={(value) => setMapLayer(value)}>
-            <SelectTrigger className="w-45">
+            <SelectTrigger className="w-full xs:w-45">
                 <SelectValue />
             </SelectTrigger>
             <SelectContent className="z-1001">
