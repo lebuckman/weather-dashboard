@@ -51,23 +51,25 @@ function App() {
         <>
             <MobileHeader setIsSidePanelOpen={setIsSidePanelOpen} />
             <div className="flex flex-col gap-8 p-8 pt-0 xs:pt-8 w-full min-h-screen lg:w-[calc(100dvw-var(--sidebar-width))]">
-                <div className="flex flex-col gap-4 xs:flex-row xs:gap-8">
-                    <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-                        <h2 className="text-2xl font-semibold">Location:</h2>
+                <div className="flex flex-col gap-4 xs:flex-row">
+                    <div className="flex flex-col gap-2 md:flex-row">
+                        <h2 className="text-lg xs:text-2xl font-semibold">Location:</h2>
                         <LocationDropdown
                             location={location}
                             setLocation={setLocation}
                         />
                     </div>
-                    <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-                        <h2 className="text-2xl font-semibold">Layer: </h2>
+                    <div className="flex flex-col gap-2 md:flex-row">
+                        <h2 className="text-lg xs:text-2xl font-semibold">Layer: </h2>
                         <MapLayerDropdown
                             mapLayer={mapLayer}
                             setMapLayer={setMapLayer}
                         />
                     </div>
                     <div className="ml-auto flex items-center gap-4">
-                        <LightDarkToggle />
+                        <div className="hidden md:block lg:hidden">
+                            <LightDarkToggle />
+                        </div>
                         <button
                             onClick={() => setIsSidePanelOpen(true)}
                             className="hidden xs:block"

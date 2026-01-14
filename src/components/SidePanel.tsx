@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import Information from "/src/assets/information.svg?react";
 import Close from "/src/assets/close.svg?react";
 import SidePanelSkeleton from "./skeletons/SidePanelSkeleton";
+import LightDarkToggle from "./LightDarkToggle";
 
 type Props = {
     coords: Coords;
@@ -26,9 +27,12 @@ export default function SidePanel(props: Props) {
                 isSidePanelOpen ? "translate-x-0" : "translate-x-full"
             )}
         >
-            <button onClick={() => setIsSidePanelOpen(false)}>
-                <Close className="size-5 mb-8 lg:hidden" />
-            </button>
+            <div className="flex justify-between items-start">
+                <button onClick={() => setIsSidePanelOpen(false)}>
+                    <Close className="size-5 mb-8 lg:hidden" />
+                </button>
+                <LightDarkToggle />
+            </div>
             <Suspense fallback={<SidePanelSkeleton />}>
                 <AirPollution {...props} />
             </Suspense>
