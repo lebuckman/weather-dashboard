@@ -64,7 +64,7 @@ export const WeatherResponseSchema = z.object({
     sys: z.object({
         type: z.number().optional(),
         id: z.number().optional(),
-        country: z.string(),
+        country: z.string().optional(),
         sunrise: z.number(),
         sunset: z.number(),
     }),
