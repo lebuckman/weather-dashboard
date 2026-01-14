@@ -38,10 +38,10 @@ export default function DailyForecast({ coords }: Props) {
                         alt={day.weather[0].description}
                     />
                     <p>{Math.round(day.temp.day)}ºF</p>
-                    <p className="text-gray-300/75">
+                    <p className="text-accent-foreground/40">
                         {Math.round(day.temp.min)}ºF
                     </p>
-                    <p className="text-gray-300/75">
+                    <p className="text-accent-foreground/40">
                         {Math.round(day.temp.max)}ºF
                     </p>
                 </div>

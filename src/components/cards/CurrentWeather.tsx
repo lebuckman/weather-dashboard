@@ -52,15 +52,15 @@ export default function CurrentWeather({ coords }: Props) {
 
             <div className="flex justify-between w-full">
                 <div className="flex flex-col items-center gap-2">
-                    <p className="text-gray-500">Feels Like</p>
+                    <p className="text-accent-foreground/40">Feels Like</p>
                     <p>{Math.round(current.main.feels_like)}ºF</p>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                    <p className="text-gray-500">Humidity</p>
+                    <p className="text-accent-foreground/40">Humidity</p>
                     <p>{current.main.humidity}%</p>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                    <p className="text-gray-500">Wind</p>
+                    <p className="text-accent-foreground/40">Wind</p>
                     <p>{current.wind.speed} mph</p>
                 </div>
             </div>
