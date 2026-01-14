@@ -11,7 +11,7 @@ export default function MapLegend({ mapLayer }: Props) {
         .join(", ");
 
     return (
-        <div className="absolute flex flex-col gap-3 top-4 right-4 z-1000 w-48 xs:w-96 rounded-xl border-accent/70 shadow-lg p-4 bg-background/50">
+        <div className="absolute flex flex-col gap-3 top-4 right-4 z-1000 w-48 xs:w-96 rounded-xl border-accent/70 shadow-lg p-4 bg-background/70">
             <h3 className="text-sm font-semibold text-foreground">
                 {data.title}
             </h3>

@@ -50,7 +50,7 @@ export default function CurrentWeather({ coords }: Props) {
                 </h3>
             </div>
 
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full mt-auto pt-10 2xl:pt-0">
                 <div className="flex flex-col items-center gap-2">
                     <p className="text-accent-foreground/40">Feels Like</p>
                     <p>{Math.round(current.main.feels_like)}ºF</p>
