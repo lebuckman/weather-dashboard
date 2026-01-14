@@ -72,7 +72,7 @@ function App() {
                             onClick={() => setIsSidePanelOpen(true)}
                             className="hidden xs:block"
                         >
-                            <Hamburger className="size-8 invert hover:cursor-pointer lg:hidden" />
+                            <Hamburger className="size-8 hover:cursor-pointer lg:hidden" />
                         </button>
                     </div>
                 </div>

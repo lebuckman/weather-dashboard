@@ -34,7 +34,7 @@ export default function MiscInfo({ coords }: Props) {
                 return (
                     <div key={value} className="flex justify-between">
                         <div className="flex items-center gap-2">
-                            <Icon className="size-4 invert" />
+                            <Icon className="size-4" />
                             <span className="text-gray-500 font-semibold">
                                 {label}
                             </span>
@@ -68,7 +68,7 @@ const rows = [
         Icon: Wind,
         format: (v: number) => (
             <UpArrow
-                className="size-5 invert transition-transform duration-300"
+                className="size-5 transition-transform duration-300"
                 style={{ transform: `rotate(${v}deg)` }}
             />
         ),

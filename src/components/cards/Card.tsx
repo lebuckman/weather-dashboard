@@ -17,7 +17,7 @@ export default function Card({
     return (
         <div
             className={clsx(
-                "flex flex-col p-4 rounded-xl bg-linear-to-br from-card to-card/40 shadow-md 2xl:h-full",
+                "flex flex-col p-4 rounded-xl bg-linear-to-br from-card to-card/40 shadow-md 2xl:h-full border",
                 title && 'gap-4',
                 className
             )}
