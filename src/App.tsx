@@ -17,6 +17,7 @@ import MiscInfoSkeleton from "./components/skeletons/MiscInfoSkeleton";
 import SidePanel from "./components/SidePanel";
 import Hamburger from "/src/assets/hamburger.svg?react";
 import MobileHeader from "./components/MobileHeader";
+import LightDarkToggle from "./components/LightDarkToggle";
 
 function App() {
     const [mapLayer, setMapLayer] = useState("clouds_new");
@@ -65,12 +66,15 @@ function App() {
                             setMapLayer={setMapLayer}
                         />
                     </div>
-                    <button
-                        onClick={() => setIsSidePanelOpen(true)}
-                        className="hidden xs:block"
-                    >
-                        <Hamburger className="size-8 invert ml-auto hover:cursor-pointer lg:hidden" />
-                    </button>
+                    <div className="ml-auto flex items-center gap-4">
+                        <LightDarkToggle />
+                        <button
+                            onClick={() => setIsSidePanelOpen(true)}
+                            className="hidden xs:block"
+                        >
+                            <Hamburger className="size-8 invert hover:cursor-pointer lg:hidden" />
+                        </button>
+                    </div>
                 </div>
                 <div className="grid grid-cols-1 gap-8 2xl:flex-1 2xl:min-h-0 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4">
                     <div className="relative h-120 md:col-span-2 2xl:h-auto 2xl:col-span-full 2xl:row-span-2 order-1">
