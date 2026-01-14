@@ -19,7 +19,11 @@ export default function CurrentWeather({ coords }: Props) {
     });
 
     return (
-        <Card title="Current Weather" className="h-full" childrenClassName="flex flex-col items-center gap-2 2xl:justify-evenly">
+        <Card
+            title="Current Weather"
+            className="h-full"
+            childrenClassName="flex flex-col items-center gap-2 2xl:justify-evenly"
+        >
             <div className="flex flex-col items-center gap-2">
                 <h2 className="text-6xl font-semibold">
                     {Math.round(current.main.temp)}ºF
@@ -41,7 +45,7 @@ export default function CurrentWeather({ coords }: Props) {
                         hour: "2-digit",
                         minute: "2-digit",
                         hour12: true,
-                        timeZone: 'UTC'
+                        timeZone: "UTC",
                     }).format(new Date((current.dt + current.timezone) * 1000))}
                 </h3>
             </div>
