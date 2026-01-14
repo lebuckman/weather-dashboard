@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React project that leverages the information provided by OpenWeather API to display useful weather statistics on a location selected on an interactive map provided with the help of Leaflet. Original project credit outlined below.
 
-Currently, two official plugins are available:
+![Full Dashboard View](/public/desktop.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div style="display: flex; align-items: center; justify-content: space-evenly">
+  <img src="./public/tablet.png" alt="Tablet View" width="400px">
+  <img src="./public/mobile.png" alt="Mobile View" width="220px">
+</div>
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **OpenWeather API** - Various endpoints called to access weather data for a location
+- **React Leaflet** - Connect with OpenWeather's data to create an interactive map
+- **Dynamic Data** - Dashboard data updates immediately based on the map location, whether you choose from the pre-populated locations list, or interact with the map itself
+- **Map Layers** - Choose a map layer to visualize clouds, temperature, precipitation, wind, and pressure
+- **Responsive Design** - Mobile-first UI with Tailwind CSS and shadcn/ui
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- React Leaflet
+- Vite
+- TypeScript
+- TanStack Query
+- Axios
+- Zod
+- Tailwind CSS
+- shadcn/ui
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## OpenWeather API
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This project makes use of free* APIs provided by OpenWeather.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Current weather API**
+- **Hourly Forecast 4 days***
+- **Daily Forecast 16 days***
+- **Air Pollution API**
+- **Geocoding API**
+
+<small>* Free for students</small>
+
+### `.env.local`
+
+An API key is required to access [OpenWeather endpoints](https://openweathermap.org/api).
+
+```env
+# Obtain an API key at https://openweathermap.org/api
+VITE_OPENWEATHER_KEY=
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Alterations
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Rather than using OpenWeather's One Call API 3.0, which requires payment information, different endpoints were used for fetching daily and hourly forecast data.
+- The use of an Axios instance simplified calling the different APIs
+- Modified TanStack queries used to account different endpoints
+- Excluded MapTiler SDK -> issues importing required packages
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Acknowledgements
+
+- [Build a Real React App With Me by Austin Davis](https://www.youtube.com/watch?v=M-iV9R3kLNA&t=16761s)
